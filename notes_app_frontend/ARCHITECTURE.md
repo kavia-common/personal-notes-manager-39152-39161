@@ -1,4 +1,4 @@
-# Ocean Notes – Frontend Architecture
+# Simple Notes
 
 ## Overview
 Ocean Notes is a single-page React application that lets users create, edit, and manage personal notes with a modern UI themed “Ocean Professional.” The application is designed with a local-first approach, persisting data in the browser’s localStorage as a baseline, while being prepared for a future backend integration via environment-configurable endpoints.
