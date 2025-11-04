@@ -1,82 +1,70 @@
-# Lightweight React Template for KAVIA
+# Ocean Notes – React Frontend
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A modern single-page Notes application with an Ocean Professional theme. It includes a sidebar for the notes list and a main area for viewing and editing the selected note. Data is persisted to `localStorage` by default. If backend environment variables are configured, the app is ready for extension to use network APIs.
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Single-page layout with Sidebar + Editor
+- Create, edit (autosave), delete notes
+- Search/filter and sort (by updated, created, or title)
+- Markdown editor with live Preview toggle (lightweight, no external deps)
+- LocalStorage persistence as a baseline
+- Ocean Professional theme (primary #2563EB, secondary #F59E0B, error #EF4444)
+- Modern UI: rounded corners, subtle shadows, smooth transitions
+- Responsive and accessible: keyboard navigation for list, aria labels
+- Internal state routing (no URL routing required)
 
-## Getting Started
+## Quickstart
 
-In the project directory, you can run:
+In the container directory:
 
-### `npm start`
+- `npm start` – run the app in development mode.
+- `npm test` – run tests in watch mode.
+- `npm run build` – build for production.
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+App runs on http://localhost:3000.
 
-### `npm test`
+## Project Structure
 
-Launches the test runner in interactive watch mode.
+- `src/components/Header.js` – App header with brand and New Note button
+- `src/components/NotesList.js` – Sidebar with search, sorting, and keyboard navigation
+- `src/components/NoteEditor.js` – Editor with title, markdown body, autosave, and preview
+- `src/components/EmptyState.js` – When no note is selected/available
+- `src/utils/storage.js` – LocalStorage CRUD and env detection (migration-friendly)
+- `src/utils/markdown.js` – Minimal markdown renderer for preview
+- `src/theme.css` – Ocean theme tokens and component styles
+- `src/App.js` – App wiring and internal state routing
 
-### `npm run build`
+## Environment Variables
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The app will use LocalStorage by default. You can set the following to enable/prepare backend connectivity. If empty, the app continues to use LocalStorage.
 
-## Customization
+- `REACT_APP_API_BASE` – Base URL for API (optional)
+- `REACT_APP_BACKEND_URL` – Alternative backend URL (optional)
+- `REACT_APP_WS_URL` – WebSocket URL (optional)
+- Other standard envs (optional): `REACT_APP_FRONTEND_URL`, `REACT_APP_NODE_ENV`, `REACT_APP_NEXT_TELEMETRY_DISABLED`, `REACT_APP_ENABLE_SOURCE_MAPS`, `REACT_APP_PORT`, `REACT_APP_TRUST_PROXY`, `REACT_APP_LOG_LEVEL`, `REACT_APP_HEALTHCHECK_PATH`, `REACT_APP_FEATURE_FLAGS`, `REACT_APP_EXPERIMENTS_ENABLED`
 
-### Colors
+Note: Do not commit secrets. Provide a `.env` file via deployment tooling. Example `.env.example`:
 
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
+```
+REACT_APP_API_BASE=
+REACT_APP_BACKEND_URL=
+REACT_APP_WS_URL=
 ```
 
-### Components
+## Accessibility
 
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
+- Notes list supports keyboard navigation: Up/Down to move, Enter to select, Delete to remove.
+- Proper aria-labels for inputs and regions.
+- Focus rings and contrast-aware palette.
 
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
+## Styling
 
-## Learn More
+- Colors and component styles are defined in `src/theme.css`.
+- Subtle shadows, rounded corners, and transitions to match the Ocean Professional theme.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Extending to a Backend
 
-### Code Splitting
+- `src/utils/storage.js` exposes `getEnv()` to detect if backend is configured.
+- Replace the CRUD calls with API requests when backend endpoints become available while keeping the same public interface.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
